@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "CelcomDigi Payment Info"
+description = "A clear, mobile-friendly information page that directs visitors to CelcomDigi’s official bill-payment service without collecting personal or payment details."
+version = "1.0.0"
+id = "artifacts/celcomdigi-payment-info"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21602
+
+[services.development]
+run = "pnpm --filter @workspace/celcomdigi-payment-info run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/celcomdigi-payment-info", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/celcomdigi-payment-info/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21602"
+BASE_PATH = "/"
