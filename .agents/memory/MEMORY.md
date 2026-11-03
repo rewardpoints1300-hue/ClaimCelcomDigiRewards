@@ -1,0 +1,1 @@
+- [Brand lookup tool access](brand-lookup-tool-access.md) — branding extraction and image search may be gated; use public page visuals when unavailable.

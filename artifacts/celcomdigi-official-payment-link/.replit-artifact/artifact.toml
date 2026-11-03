@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "CelcomDigi Payment Link"
+description = "A standalone, trust-focused information page that directs visitors to CelcomDigi’s official bill-payment service without collecting personal or payment details."
+version = "1.0.0"
+id = "artifacts/celcomdigi-official-payment-link"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18647
+
+[services.development]
+run = "pnpm --filter @workspace/celcomdigi-official-payment-link run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/celcomdigi-official-payment-link", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/celcomdigi-official-payment-link/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18647"
+BASE_PATH = "/"
